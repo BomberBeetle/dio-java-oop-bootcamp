@@ -28,4 +28,8 @@ public class Bootcamp {
     public void setDescricao(String descricao) {
         this.descricao = descricao;
     }
+
+    public Set<Conteudo> getConteudos() {
+        return conteudos;
+    }
 }
