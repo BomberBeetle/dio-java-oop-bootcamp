@@ -8,8 +8,8 @@ import java.util.function.Consumer;
 
 public class Dev {
     private String nome;
-    private Set<Conteudo> conteudosConcluidos = new LinkedHashSet<>();
-    private Set<Conteudo> conteudosInscritos = new LinkedHashSet<>();
+    private final Set<Conteudo> conteudosConcluidos = new LinkedHashSet<>();
+    private final Set<Conteudo> conteudosInscritos = new LinkedHashSet<>();
 
     public void inscreverBootcamp(Bootcamp bootcamp){
         this.conteudosInscritos.addAll(bootcamp.getConteudos());
@@ -23,8 +23,15 @@ public class Dev {
         }
     }
 
+    public void progedirConteudo(Conteudo conteudo){
+        if(this.conteudosInscritos.contains(conteudo)){
+            this.conteudosConcluidos.add(conteudo);
+            this.conteudosInscritos.remove(conteudo);
+        }
+    }
+
     public double calcularTotalXp(){
-        return this.conteudosConcluidos.stream().mapToDouble(conteudo -> conteudo.calcularXp()).sum();
+        return this.conteudosConcluidos.stream().mapToDouble(Conteudo::calcularXp).sum();
     }
 
     public String getNome() {
